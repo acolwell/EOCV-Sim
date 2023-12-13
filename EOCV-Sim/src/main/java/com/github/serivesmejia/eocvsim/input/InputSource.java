@@ -94,7 +94,12 @@ public abstract class InputSource implements Comparable<InputSource> {
 
     @Override
     public final int compareTo(InputSource source) {
-        return createdOn > source.createdOn ? 1 : -1;
+        if (createdOn > source.createdOn) {
+            return 1;
+        } else if (createdOn < source.createdOn) {
+            return -1;
+        }
+        return name.compareTo(source.name);
     }
 
 }
