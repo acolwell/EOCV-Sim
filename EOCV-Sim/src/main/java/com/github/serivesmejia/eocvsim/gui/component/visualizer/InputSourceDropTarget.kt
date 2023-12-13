@@ -31,7 +31,6 @@ class InputSourceDropTarget(val eocvSim: EOCVSim) : DropTarget() {
 
                 if(sourceType != SourceType.UNKNOWN) {
                     DialogFactory.createSourceDialog(eocvSim, sourceType, file)
-                    break
                 }
             }
         } catch (e: Exception) {
