@@ -63,6 +63,8 @@ allprojects {
         }
     }
 
+    version += "-ajc"
+
     if(env == 'dev') {
         String date = DateTimeFormatter.ofPattern(
             "yyMMdd-HHmm"
