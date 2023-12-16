@@ -35,9 +35,6 @@ import com.github.serivesmejia.eocvsim.util.SysUtil;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class Configuration {
 
@@ -48,6 +45,8 @@ public class Configuration {
     public JButton acceptButton = new JButton("Accept");
 
     public JCheckBox pauseOnImageCheckBox = new JCheckBox();
+
+    public JCheckBox useImageSizeCheckBox = new JCheckBox();
 
     public EnumComboBox<PipelineTimeout> pipelineTimeoutComboBox = null;
     public EnumComboBox<PipelineFps> pipelineFpsComboBox = null;
@@ -103,7 +102,7 @@ public class Configuration {
         /*
         INPUT SOURCES TAB
          */
-        JPanel inputSourcesPanel = new JPanel(new GridLayout(2, 1, 1, 8));
+        JPanel inputSourcesPanel = new JPanel(new GridLayout(3, 1, 1, 8));
 
         /* PAUSE WITH IMAGE SOURCES OPTION */
         JPanel pauseOnImagePanel = new JPanel(new FlowLayout());
@@ -115,6 +114,16 @@ public class Configuration {
         pauseOnImagePanel.add(pauseOnImageLabel);
 
         inputSourcesPanel.add(pauseOnImagePanel);
+
+        /* UseImageSize OPTION */
+        JPanel useImageSizePanel = new JPanel(new FlowLayout());
+        JLabel useImageSizeLabel = new JLabel("Use Image size instead of EOCV default");
+
+        useImageSizeCheckBox.setSelected(config.useImageSizeInsteadOfEOCVDefaultSize);
+
+        useImageSizePanel.add(useImageSizeCheckBox);
+        useImageSizePanel.add(useImageSizeLabel);
+        inputSourcesPanel.add(useImageSizePanel);
 
         /* PREFERRED WEBCAM DRIVER OPTION */
         preferredWebcamDriver = new EnumComboBox<>(
@@ -211,6 +220,7 @@ public class Configuration {
         //save user modifications to config
         config.simTheme = userSelectedTheme;
         config.pauseOnImages = pauseOnImageCheckBox.isSelected();
+        config.useImageSizeInsteadOfEOCVDefaultSize = useImageSizeCheckBox.isSelected();
         config.preferredWebcamDriver = preferredWebcamDriver.getSelectedEnum();
         config.pipelineTimeout = pipelineTimeoutComboBox.getSelectedEnum();
         config.pipelineMaxFps = pipelineFpsComboBox.getSelectedEnum();

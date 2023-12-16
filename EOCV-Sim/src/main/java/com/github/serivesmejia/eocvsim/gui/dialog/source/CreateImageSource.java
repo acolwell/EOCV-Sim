@@ -173,7 +173,10 @@ public class CreateImageSource {
                 nameTextField.setText(eocvSim.inputSourceManager.tryName(fileName));
             }
 
-            Size size = CvUtil.scaleToFit(CvUtil.getImageSize(fileAbsPath), EOCVSim.DEFAULT_EOCV_SIZE);
+            Size size = CvUtil.getImageSize(fileAbsPath);
+            if (!eocvSim.configManager.getConfig().useImageSizeInsteadOfEOCVDefaultSize) {
+                size = CvUtil.scaleToFit(size, EOCVSim.DEFAULT_EOCV_SIZE);
+            }
 
             sizeFieldsInput.getWidthTextField().setText(String.valueOf(Math.round(size.width)));
             sizeFieldsInput.getHeightTextField().setText(String.valueOf(Math.round(size.height)));

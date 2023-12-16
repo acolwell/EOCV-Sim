@@ -51,6 +51,8 @@ public class Config {
     public volatile WebcamDriver preferredWebcamDriver = WebcamDriver.OpenIMAJ;
     public volatile String workspacePath  = CompiledPipelineManager.Companion.getDEF_WORKSPACE_FOLDER().getAbsolutePath();
 
+    public volatile boolean useImageSizeInsteadOfEOCVDefaultSize = false;
+
     public volatile TunableFieldPanelConfig.Config globalTunableFieldsConfig =
             new TunableFieldPanelConfig.Config(
                     new Size(0, 255),
