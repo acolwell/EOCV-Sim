@@ -162,7 +162,9 @@ class SwingOpenCvViewport(size: Size, fpsMeterDescriptor: String = "deltacv Visi
         }
     }
 
-    override fun setFpsMeterEnabled(enabled: Boolean) {}
+    override fun setFpsMeterEnabled(enabled: Boolean) {
+        renderer.setFpsMeterEnabled(enabled);
+    }
     override fun resume() {
         synchronized(syncObj) {
             userRequestedPause = false

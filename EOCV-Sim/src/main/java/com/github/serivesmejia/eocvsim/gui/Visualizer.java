@@ -96,7 +96,7 @@ public class Visualizer {
         this.eocvSim = eocvSim;
     }
 
-    public void init(Theme theme) {
+    public void init(Theme theme, boolean fpsMeterEnabled) {
         if(Taskbar.isTaskbarSupported()){
             try {
                 //set icon for mac os (and other systems which do support this method)
@@ -128,6 +128,7 @@ public class Visualizer {
 
         viewport = new SwingOpenCvViewport(new Size(1080, 720), fpsMeterDescriptor);
         viewport.setDark(FlatLaf.isLafDark());
+        viewport.setFpsMeterEnabled(fpsMeterEnabled);
 
         colorPicker = new ColorPicker(viewport);
 
@@ -226,8 +227,8 @@ public class Visualizer {
         }
     }
 
-    public void initAsync(Theme simTheme) {
-        SwingUtilities.invokeLater(() -> init(simTheme));
+    public void initAsync(Theme simTheme, boolean fpsMeterEnabled) {
+        SwingUtilities.invokeLater(() -> init(simTheme, fpsMeterEnabled));
     }
 
     private void registerListeners() {

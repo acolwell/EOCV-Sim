@@ -42,6 +42,8 @@ public class Configuration {
     public JPanel contents = new JPanel(new GridBagLayout());
     public JComboBox<String> themeComboBox = new JComboBox<>();
 
+    public JCheckBox fpsMeterEnabledCheckBox = new JCheckBox();
+
     public JButton acceptButton = new JButton("Accept");
 
     public JCheckBox pauseOnImageCheckBox = new JCheckBox();
@@ -80,7 +82,7 @@ public class Configuration {
         UI TAB
          */
 
-        JPanel uiPanel = new JPanel(new GridLayout(1, 1, 1, 8));
+        JPanel uiPanel = new JPanel(new GridLayout(2, 1, 1, 8));
 
         /* THEME SETTING */
         JPanel themePanel = new JPanel(new FlowLayout());
@@ -96,6 +98,14 @@ public class Configuration {
         themePanel.add(themeLabel);
         themePanel.add(this.themeComboBox);
         uiPanel.add(themePanel);
+
+        JPanel enableFpsMeterPanel = new JPanel(new FlowLayout());
+        JLabel enableFpsMeterLabel = new JLabel("Enable FPS meter");
+
+        fpsMeterEnabledCheckBox.setSelected(config.fpsMeterEnabled);
+        enableFpsMeterPanel.add(fpsMeterEnabledCheckBox);
+        enableFpsMeterPanel.add(enableFpsMeterLabel);
+        uiPanel.add(enableFpsMeterPanel);
 
         tabbedPane.addTab("Interface", uiPanel);
 
@@ -216,9 +226,11 @@ public class Configuration {
 
         Theme userSelectedTheme = Theme.valueOf(themeComboBox.getSelectedItem().toString().replace(" ", "_"));
         Theme beforeTheme = config.simTheme;
+        boolean beforeFpsMeterEnabled = config.fpsMeterEnabled;
 
         //save user modifications to config
         config.simTheme = userSelectedTheme;
+        config.fpsMeterEnabled = fpsMeterEnabledCheckBox.isSelected();
         config.pauseOnImages = pauseOnImageCheckBox.isSelected();
         config.useImageSizeInsteadOfEOCVDefaultSize = useImageSizeCheckBox.isSelected();
         config.preferredWebcamDriver = preferredWebcamDriver.getSelectedEnum();
@@ -229,8 +241,11 @@ public class Configuration {
 
         eocvSim.configManager.saveToFile(); //update config file
 
-        if (userSelectedTheme != beforeTheme)
+        if (userSelectedTheme != beforeTheme) {
             eocvSim.restart();
+        } else if (beforeFpsMeterEnabled != config.fpsMeterEnabled) {
+            eocvSim.visualizer.viewport.setFpsMeterEnabled(config.fpsMeterEnabled);
+        }
     }
 
     public void close() {

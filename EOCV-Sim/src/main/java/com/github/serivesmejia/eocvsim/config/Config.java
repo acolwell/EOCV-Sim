@@ -53,6 +53,8 @@ public class Config {
 
     public volatile boolean useImageSizeInsteadOfEOCVDefaultSize = false;
 
+    public volatile boolean fpsMeterEnabled = true;
+
     public volatile TunableFieldPanelConfig.Config globalTunableFieldsConfig =
             new TunableFieldPanelConfig.Config(
                     new Size(0, 255),

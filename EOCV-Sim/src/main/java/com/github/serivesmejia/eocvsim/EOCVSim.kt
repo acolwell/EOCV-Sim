@@ -194,7 +194,11 @@ class EOCVSim(val params: Parameters = Parameters()) {
 
         workspaceManager.init()
 
-        visualizer.initAsync(configManager.config.simTheme) //create gui in the EDT
+        //create gui in the EDT
+        visualizer.initAsync(
+            configManager.config.simTheme,
+            configManager.config.fpsMeterEnabled
+        )
 
         inputSourceManager.init() //loading user created input sources
 
