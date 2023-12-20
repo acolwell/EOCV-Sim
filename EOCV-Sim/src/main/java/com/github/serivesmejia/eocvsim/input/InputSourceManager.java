@@ -212,6 +212,10 @@ public class InputSourceManager {
             src = sources.get(sourceName);
         }
 
+        if (src == currentInputSource) {
+            return true;
+        }
+
         if (src != null) {
             src.reset();
             src.eocvSim = eocvSim;

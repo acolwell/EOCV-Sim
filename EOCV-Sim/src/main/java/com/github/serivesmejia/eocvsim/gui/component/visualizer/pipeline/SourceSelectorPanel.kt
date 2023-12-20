@@ -120,8 +120,6 @@ class SourceSelectorPanel(private val eocvSim: EOCVSim) : JPanel() {
                                 }
                             }
                         }
-                    } else {
-                        sourceSelector.setSelectedIndex(1)
                     }
                 } catch (ignored: ArrayIndexOutOfBoundsException) {
                 }
